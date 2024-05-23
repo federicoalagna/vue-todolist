@@ -1,26 +1,33 @@
+console.log ('todolist');
 
+const {createApp} = Vue;
 
-new Vue({
-    el: '#app',
-    data: {
-        todos: [
-            { text: 'Quarterly Newsletter', done: true },
-            { text: 'Recruiting blog post', done: true },
-            { text: 'Mobile app launch', done: true },
-            // Aggiungi altri todo qui
-        ],
-        newTodoText: '' // Testo del nuovo todo che l'utente inserisce nell'input
+createApp({
+    data() {
+    return {
+
+ 
+        title: 'To Do List',
+        tasks: [1, 2, 3, 4],
+        newTask: null,
+    };
     },
+
     methods: {
-        addTodo: function() {
-            if (this.newTodoText.trim() === '') {
-                return;
-            }
-            this.todos.push({ text: this.newTodoText, done: false });
-            this.newTodoText = ''; // Resetta il campo di input dopo aver aggiunto il todo
+        removeTask(indexRicevuto){
+            console.log (indexRicevuto)
+            console.log ('rimuovo il task')
+
+            this.tasks = this.tasks.filter((task, index) =>   index !== indexRicevuto);
+      
+        
         },
-        removeTodo: function(index) {
-            this.todos.splice(index, 1);
+        addTask (){
+            console.log ('aggiungi il task')
+            
+            
+            this.tasks.push(this.newTask);
+            this.newTask = null;
         }
-    }
-});
+    },
+}).mount(`#app`);
